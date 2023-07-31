@@ -1,0 +1,11 @@
+.popup__safe-btn_disabled {
+  background-color: transparent;
+  color: #000;
+  border: 1px solid #000;
+  opacity: .2;
+  cursor: default;
+}
+
+.popup__safe-btn_disabled:hover {
+  background-color: transparent;
+}

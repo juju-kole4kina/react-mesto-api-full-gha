@@ -1,0 +1,34 @@
+.profile__avatar {
+  max-width: 120px;
+  max-height: 120px;
+  border-radius: 50%;
+  position: relative;
+}
+
+.profile__avatar::after {
+  content: '';
+  background-color: rgba(0, 0, 0, .8);
+  background-image: url('../../../images/icons/avatar-change.svg');
+  background-position: 50%;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity .5s ease;
+  cursor: pointer;
+}
+
+.profile__avatar:hover::after {
+  opacity: 1;
+}
+
+@media (max-width: 635px) {
+  .profile__avatar {
+    margin: 0 auto 25px;
+  }
+}
+
+

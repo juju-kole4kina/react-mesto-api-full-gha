@@ -1,0 +1,10 @@
+.popup__status-icon {
+  display: block;
+  max-width: 120px;
+  width: 100%;
+  max-height: 120px;
+  height: 100%;
+  margin: 0 auto;
+  margin-bottom: 32px;
+  margin-top: 20px;
+}

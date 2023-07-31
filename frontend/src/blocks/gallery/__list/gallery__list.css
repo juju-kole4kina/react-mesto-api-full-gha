@@ -1,0 +1,25 @@
+.gallery__list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  column-gap: 17px;
+  row-gap: 20px;
+  grid-template-columns: repeat(auto-fit, 282px);
+  justify-content: center;
+}
+
+@media (max-width: 959px) {
+  .gallery__list {
+    column-gap: 19px;
+    row-gap: 22px;
+  }
+}
+
+@media (max-width: 320px) {
+  .gallery__list {
+    column-gap: 0;
+    margin: 0 auto;
+    row-gap: 20px;
+  }
+}

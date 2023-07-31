@@ -1,0 +1,17 @@
+.gallery {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+@media (max-width: 520px) {
+  .gallery {
+    padding: 0;
+  }
+}
+
+@media (max-width: 320px) {
+  .gallery {
+    max-width: 282px;
+  }
+}
