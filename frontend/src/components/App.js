@@ -43,12 +43,9 @@ function App() {
       })
       .catch((err) => console.log(err));
     }
-  }, [isLoggedIn]);
-
-  React.useEffect(() => {
     tokenCheck();
     // eslint-disable-next-line
-  }, []);
+  }, [isLoggedIn]);
 
   function tokenCheck() {
       auth.getContent()
