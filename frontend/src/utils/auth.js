@@ -15,6 +15,7 @@ export default class Auth {
     return fetch(`${this._url}/signup`, {
       method: 'POST',
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({password, email})
     })
     .then(res => this._checkResponse(res))
@@ -28,39 +29,49 @@ export default class Auth {
     return fetch(`${this._url}/signin`, {
       method: 'POST',
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({email, password})
     })
     .then(res => this._checkResponse(res))
     .then((data) => {
-      if(data.token){
-        localStorage.setItem('jwt', data.token);
         return data;
-      }
     })
     .then(result => {console.log(result);
       return result;
     })
   }
 
-  getContent(token) {
+  getContent() {
     return fetch(`${this._url}/users/me`, {
       method: 'GET',
       headers:{
         "Content-Type": "application/json",
-        "Authorization" : `Bearer ${token}`
-      }
+      },
+      credentials: 'include',
     })
     .then(res => this._checkResponse(res))
-    // .then(data => data)
     .then(result => {console.log(result);
       return result;
     })
   }
 
+  logout() {
+    return fetch(`${this._url}/signout`, {
+      method: 'GET',
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      credentials: 'include',
+    })
+    .then(res => this._checkResponse(res))
+    .then(result => {console.log(result);
+      return result;
+    })
+  }
 }
 
-
 export const auth = new Auth({
-  url: 'https://auth.nomoreparties.co',
+  url: 'http://localhost:4000',
   headers: {"Content-Type": "application/json"}
 })

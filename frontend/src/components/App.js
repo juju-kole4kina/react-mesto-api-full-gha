@@ -36,50 +36,49 @@ function App() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    api.getUserInfo()
-    .then((data) => {
-      setCurrentUser(data);
-    })
-    .catch((err) => console.log(err));
-  }, [])
-
-  React.useEffect(() => {
-    api.getInitialCard()
-    .then((cards) => {
-      setCards(cards);
-    })
-    .catch(err => console.log(err));
-  }, [])
-
-  React.useEffect(() => {
+    if (isLoggedIn) {
+      Promise.all([ api.getUserInfo(), api.getInitialCard() ])
+      .then(([data, cards]) => {
+        setCurrentUser(data);
+        setCards(cards.reverse());
+      })
+      .catch((err) => console.log(err));
+    }
     tokenCheck();
-  }, []);
+  }, [isLoggedIn]);
 
   function tokenCheck() {
-    const jwt = localStorage.getItem('jwt');
-    if(jwt){
-      auth.getContent(jwt).then((res) => {
+      auth.getContent()
+      .then((res) => {
         if(res){
           setLoggedIn(true);
-          setEmail(res.data.email)
+          setEmail(res.email)
           navigate('/', {replace: true})
         }
       })
       .catch((err) => console.log(err));
-    }
   }
 
   function handleLogin(email, password) {
     auth.autorize(email, password)
     .then(() => {
-      navigate('/', {replace: true})
+      setLoggedIn(true);
+      navigate('/', {replace: true});
     })
     .catch((err) => console.log(err));
-    setLoggedIn(true);
+  }
+
+  function handleSignOut() {
+    auth.logout()
+    .then(() => {
+      setLoggedIn(false);
+      navigate('/sign-in', { replace: true });
+    })
+    .catch((err) => console.log(err));
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked)
     .then((newCard) => {
       const newCards = cards.map((c) => c._id === card._id ? newCard : c);
@@ -173,7 +172,7 @@ function App() {
   }
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <Header userData={email} />
+      <Header userData={email} handleSignOut={handleSignOut} />
       <Routes>
         <Route path='/sign-in' element={<Login handleLogin={handleLogin} />} />
         <Route path='/sign-up' element={<Register isRegister={handleRegister} />} />

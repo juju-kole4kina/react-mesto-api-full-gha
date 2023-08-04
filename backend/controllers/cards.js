@@ -2,10 +2,7 @@ const Card = require('../models/card');
 
 const NotFoundError = require('../errors/not-found-err');
 const BadRequesError = require('../errors/bad-request-err');
-// const ConflictError = require('../errors/conflict-err');
 const ForbiddenError = require('../errors/forbiddenError');
-// const InternalServerError = require('../errors/internal-server-err');
-// const UnauthorizationError = require('../errors/unauthorization-err');
 
 const { CREATE_STATUS_CODE } = require('../utils/constants');
 

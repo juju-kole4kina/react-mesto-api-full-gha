@@ -14,9 +14,8 @@ _checkResponse(res) {
 
 getInitialCard() {
   return fetch(`${this._url}/cards`, {
-    headers: {
-      authorization: this._authorization
-    }
+    headers: this._headers,
+    credentials: 'include',
   })
   .then(res => this._checkResponse(res))
   .then(result => {console.log(result);
@@ -26,7 +25,8 @@ getInitialCard() {
 
 getUserInfo() {
   return fetch(`${this._url}/users/me`, {
-    headers: this._headers
+    headers: this._headers,
+    credentials: 'include',
   })
   .then(res => this._checkResponse(res))
   .then(result => {console.log(result);
@@ -39,6 +39,7 @@ setUserInfo(data) {
   return fetch(`${this._url}/users/me`, {
     method: 'PATCH',
     headers: this._headers,
+    credentials: 'include',
     body: JSON.stringify({
       name: data.name,
       about: data.about
@@ -55,6 +56,7 @@ setUserAvatar(data) {
   return fetch(`${this._url}/users/me/avatar`, {
     method: 'PATCH',
     headers: this._headers,
+    credentials: 'include',
     body: JSON.stringify({
       // avatar: data.link,
       avatar: data.avatar,
@@ -70,6 +72,7 @@ addNewCard(data) {
   return fetch(`${this._url}/cards`, {
     method: 'POST',
     headers:this._headers,
+    credentials: 'include',
     body: JSON.stringify({
       name: data.name,
       link: data.link
@@ -84,7 +87,9 @@ addNewCard(data) {
 cardDelete(cardId) {
   return fetch(`${this._url}/cards/${cardId}`, {
     method: 'DELETE',
-    headers: {authorization: this._authorization}
+    // headers: {authorization: this._authorization},
+    headers: this._headers,
+    credentials: 'include',
   })
   .then(res => this._checkResponse(res))
   .then(result => {console.log(`cardDelete: ${result}`);
@@ -93,9 +98,10 @@ cardDelete(cardId) {
 }
 
 putCardLike(cardId) {
-  return fetch(`${this._url}/cards/likes/${cardId}`, {
+  return fetch(`${this._url}/cards/${cardId}/likes`, {
     method: 'PUT',
-    headers: this._headers
+    headers: this._headers,
+    credentials: 'include',
   })
   .then(res => this._checkResponse(res))
   .then(result => {console.log(result);
@@ -104,9 +110,10 @@ putCardLike(cardId) {
 }
 
 deleteCardLike(cardId) {
-  return fetch(`${this._url}/cards/likes/${cardId}`, {
+  return fetch(`${this._url}/cards/${cardId}/likes`, {
     method: 'DELETE',
-    headers: this._headers
+    headers: this._headers,
+    credentials: 'include',
   })
   .then(res => this._checkResponse(res))
   .then(result => {console.log(result);
@@ -120,9 +127,9 @@ changeLikeCardStatus(cardId, isLiked) {
 }
 
 export const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-65',
+  baseUrl: 'http://localhost:4000',
   headers: {
-    authorization: 'e66028db-2d04-435a-b30a-e2914b0c1191',
+    // authorization: 'e66028db-2d04-435a-b30a-e2914b0c1191',
     'Content-Type': 'application/json'
   }
 });

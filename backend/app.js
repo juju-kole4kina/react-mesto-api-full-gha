@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { celebrate, Joi, errors } = require('celebrate');
+const cors = require('cors');
 
 const routesUser = require('./routes/users');
 const routesCard = require('./routes/cards');
@@ -16,9 +17,14 @@ const { createUser } = require('./controllers/users');
 
 const { auth } = require('./middlewares/auth');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 4000 } = process.env;
 
 const app = express();
+
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true,
+}));
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -57,6 +63,10 @@ app.use(auth);
 
 app.use(routesUser);
 app.use(routesCard);
+
+app.get('/signout', (req, res) => {
+  res.clearCookie('jwt').send({ message: 'Выход' });
+});
 
 app.use((req, res) => {
   res.status(NOT_FOUND_STATUS_CODE).send({ message: 'Данного адреса не существует' });
