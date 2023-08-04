@@ -192,7 +192,6 @@ function App() {
           isLoggedIn={isLoggedIn}/>} />
         <Route path='/' element={isLoggedIn ? <Navigate to='/' /> : <Navigate to='/sign-in' /> } />
       </Routes>
-
       <Footer />
       <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
       <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} />
@@ -203,7 +202,6 @@ function App() {
         title="Вы уверены?"
         buttonText="Да"
       />
-
       <ImagePopup
         isOpen={isImageOpen}
         card={selectedCard}
