@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import logo from '../images/logo.svg';
 
 function Header(props) {
-  // const navigate = useNavigate();
   const location = useLocation();
 
   return(

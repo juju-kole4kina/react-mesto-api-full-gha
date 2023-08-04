@@ -33,9 +33,6 @@ export default class Auth {
       body: JSON.stringify({email, password})
     })
     .then(res => this._checkResponse(res))
-    // .then((data) => {
-    //     return data;
-    // })
     .then(result => {console.log(result);
       return result;
     })

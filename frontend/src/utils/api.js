@@ -47,7 +47,6 @@ setUserAvatar(data) {
     headers: this._headers,
     credentials: 'include',
     body: JSON.stringify({
-      // avatar: data.link,
       avatar: data.avatar,
     })
   })
@@ -76,7 +75,6 @@ addNewCard(data) {
 cardDelete(cardId) {
   return fetch(`${this._url}/cards/${cardId}`, {
     method: 'DELETE',
-    // headers: {authorization: this._authorization},
     headers: this._headers,
     credentials: 'include',
   })
@@ -118,7 +116,6 @@ changeLikeCardStatus(cardId, isLiked) {
 export const api = new Api({
   baseUrl: 'http://localhost:4000',
   headers: {
-    // authorization: 'e66028db-2d04-435a-b30a-e2914b0c1191',
     'Content-Type': 'application/json'
   }
 });
