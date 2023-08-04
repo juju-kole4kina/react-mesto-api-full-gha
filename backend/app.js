@@ -16,6 +16,7 @@ const { login } = require('./controllers/login');
 const { createUser } = require('./controllers/users');
 
 const { auth } = require('./middlewares/auth');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 4000 } = process.env;
 
@@ -42,6 +43,8 @@ app.use(helmet());
 app.use(limiter);
 app.use(cookieParser());
 
+app.use(requestLogger);
+
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required(true).email({ minDomainSegments: 2, tlds: { allow: true } }),
@@ -67,6 +70,8 @@ app.use(routesCard);
 app.get('/signout', (req, res) => {
   res.clearCookie('jwt').send({ message: 'Выход' });
 });
+
+app.use(errorLogger);
 
 app.use((req, res) => {
   res.status(NOT_FOUND_STATUS_CODE).send({ message: 'Данного адреса не существует' });
