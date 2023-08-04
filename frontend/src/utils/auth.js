@@ -67,6 +67,6 @@ export default class Auth {
 }
 
 export const auth = new Auth({
-  url: 'http://localhost:4000',
+  url: 'http://localhost:3000',
   headers: {"Content-Type": "application/json"}
 })
