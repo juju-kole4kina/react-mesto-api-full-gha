@@ -37,21 +37,25 @@ function App() {
 
   React.useEffect(() => {
     if (isLoggedIn) {
-      Promise.all([ api.getUserInfo(), api.getInitialCard() ])
-      .then(([data, cards]) => {
-        setCurrentUser(data);
-        setCards(cards.reverse());
+      api.getInitialCard()
+      .then((cards) => {
+        setCards(cards);
       })
       .catch((err) => console.log(err));
     }
-    tokenCheck();
   }, [isLoggedIn]);
+
+  React.useEffect(() => {
+    tokenCheck();
+    // eslint-disable-next-line
+  }, []);
 
   function tokenCheck() {
       auth.getContent()
       .then((res) => {
         if(res){
           setLoggedIn(true);
+          setCurrentUser(res);
           setEmail(res.email)
           navigate('/', {replace: true})
         }

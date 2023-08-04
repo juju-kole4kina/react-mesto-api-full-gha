@@ -23,17 +23,6 @@ getInitialCard() {
   })
 }
 
-getUserInfo() {
-  return fetch(`${this._url}/users/me`, {
-    headers: this._headers,
-    credentials: 'include',
-  })
-  .then(res => this._checkResponse(res))
-  .then(result => {console.log(result);
-    return result;
-  })
-}
-
 setUserInfo(data) {
   console.log(`data sui: ${data}`);
   return fetch(`${this._url}/users/me`, {

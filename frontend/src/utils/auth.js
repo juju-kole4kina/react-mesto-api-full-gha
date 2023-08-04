@@ -33,9 +33,9 @@ export default class Auth {
       body: JSON.stringify({email, password})
     })
     .then(res => this._checkResponse(res))
-    .then((data) => {
-        return data;
-    })
+    // .then((data) => {
+    //     return data;
+    // })
     .then(result => {console.log(result);
       return result;
     })
@@ -44,9 +44,7 @@ export default class Auth {
   getContent() {
     return fetch(`${this._url}/users/me`, {
       method: 'GET',
-      headers:{
-        "Content-Type": "application/json",
-      },
+      headers:this._headers,
       credentials: 'include',
     })
     .then(res => this._checkResponse(res))
