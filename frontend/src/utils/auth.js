@@ -19,10 +19,6 @@ export default class Auth {
       body: JSON.stringify({password, email})
     })
     .then(res => this._checkResponse(res))
-
-    .then(result => {console.log(result);
-      return result;
-    })
   }
 
   autorize(email, password) {
@@ -33,9 +29,6 @@ export default class Auth {
       body: JSON.stringify({email, password})
     })
     .then(res => this._checkResponse(res))
-    .then(result => {console.log(result);
-      return result;
-    })
   }
 
   getContent() {
@@ -45,9 +38,6 @@ export default class Auth {
       credentials: 'include',
     })
     .then(res => this._checkResponse(res))
-    .then(result => {console.log(result);
-      return result;
-    })
   }
 
   logout() {
@@ -60,9 +50,6 @@ export default class Auth {
       credentials: 'include',
     })
     .then(res => this._checkResponse(res))
-    .then(result => {console.log(result);
-      return result;
-    })
   }
 }
 

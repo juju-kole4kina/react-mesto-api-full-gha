@@ -18,9 +18,6 @@ getInitialCard() {
     credentials: 'include',
   })
   .then(res => this._checkResponse(res))
-  .then(result => {console.log(result);
-    return result;
-  })
 }
 
 setUserInfo(data) {
@@ -35,9 +32,6 @@ setUserInfo(data) {
     })
   })
   .then(res => this._checkResponse(res))
-  .then(result => {console.log(result);
-  return result;
-})
 }
 
 setUserAvatar(data) {
@@ -51,9 +45,6 @@ setUserAvatar(data) {
     })
   })
   .then(res => this._checkResponse(res))
-  .then(result => {console.log(result);
-    return result;
-  })
 }
 
 addNewCard(data) {
@@ -67,9 +58,6 @@ addNewCard(data) {
     })
   })
   .then(res => this._checkResponse(res))
-  .then(result => {console.log(result);
-    return result;
-  })
 }
 
 cardDelete(cardId) {
@@ -79,9 +67,6 @@ cardDelete(cardId) {
     credentials: 'include',
   })
   .then(res => this._checkResponse(res))
-  .then(result => {console.log(`cardDelete: ${result}`);
-    return result;
-  })
 }
 
 putCardLike(cardId) {
@@ -91,9 +76,6 @@ putCardLike(cardId) {
     credentials: 'include',
   })
   .then(res => this._checkResponse(res))
-  .then(result => {console.log(result);
-    return result;
-  })
 }
 
 deleteCardLike(cardId) {
@@ -103,9 +85,6 @@ deleteCardLike(cardId) {
     credentials: 'include',
   })
   .then(res => this._checkResponse(res))
-  .then(result => {console.log(result);
-    return result;
-  })
 }
 
 changeLikeCardStatus(cardId, isLiked) {

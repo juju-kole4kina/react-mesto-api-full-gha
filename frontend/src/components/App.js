@@ -107,17 +107,14 @@ function App() {
 
   function handleEditAvatarClick(){
     setEditAvatarPopupOpen(true);
-    console.log('попап аватара');
   }
 
   function handleEditProfileClick(){
     setEditProfilePopupOpen(true);
-    console.log('попап профиля');
   }
 
   function handleAddPlaceClick(){
     setAddPlacePopupOpen(true);
-      console.log('попап добавления карточки');
   }
 
   function handleUpdateUser(userData) {
@@ -145,7 +142,6 @@ function App() {
       name: card.name,
       link: card.link
     })
-    console.log('попап открытия карточки');
   }
 
   function handleRegister(email, password) {
@@ -168,8 +164,6 @@ function App() {
     setEditAvatarPopupOpen(false);
     setImageOpen(false);
     setInfoTooltip(false);
-
-    console.log('закрыть попап');
   }
   return (
     <CurrentUserContext.Provider value={currentUser}>
