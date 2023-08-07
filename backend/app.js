@@ -3,7 +3,6 @@ require('dotenv').config();
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { celebrate, Joi, errors } = require('celebrate');
 const cors = require('cors');
@@ -37,7 +36,7 @@ const limiter = rateLimit({
 });
 
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {});
 
