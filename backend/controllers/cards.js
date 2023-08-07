@@ -34,11 +34,12 @@ const deleteCard = (req, res, next) => {
       if (!card) {
         throw new NotFoundError('Карточка с указанным _id не найдена');
       }
-      if (req.user._id !== card.owner.toString()) {
+      if (req.user._id === card.owner.toString()) {
+        Card.findByIdAndRemove(cardId)
+          .then((isCard) => res.send(isCard));
+      } else {
         throw new ForbiddenError('У Вас нет прав для удаления этой карточки');
       }
-      Card.findById(cardId);
-      res.send(card);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
