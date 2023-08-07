@@ -23,8 +23,8 @@ const { PORT = 3000 } = process.env;
 const app = express();
 
 app.use(cors({
-  // origin: 'https://mesto.kole4kina.nomoreparties.co',
-  origin: 'http://localhost:3001',
+  origin: 'https://mesto.kole4kina.nomoreparties.co',
+  // origin: 'http://localhost:3001',
   credentials: true,
 }));
 
