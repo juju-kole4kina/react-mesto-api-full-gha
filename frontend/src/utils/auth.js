@@ -54,6 +54,7 @@ export default class Auth {
 }
 
 export const auth = new Auth({
-  url: 'https://api.mesto.kole4kina.nomoreparties.co',
+  // url: 'https://api.mesto.kole4kina.nomoreparties.co',
+  url: 'http://localhost:3000',
   headers: {"Content-Type": "application/json"}
 })

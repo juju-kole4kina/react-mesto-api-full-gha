@@ -25,6 +25,9 @@ const getUserId = (req, res, next) => {
       res.send(user);
     })
     .catch((err) => {
+      if (err.name === 'CastError') {
+        next(new BadRequesError('Переданы некорректные данные для получения пользователя'));
+      }
       next(err);
     });
 };
@@ -57,6 +60,23 @@ const createUser = (req, res, next) => {
     });
 };
 
+const getActiveUser = (req, res, next) => {
+  User.findById(req.user._id)
+    .then((user) => {
+      if (!user) {
+        throw new NotFoundError('Пользователь с указанным _id не найден');
+      }
+      res.send(user);
+    })
+    .catch((err) => {
+      // if (err.name === 'CastError') {
+      //   next(new BadRequesError('Переданы неgggкорректные данные при получении пользователя'));
+      //   return;
+      // }
+      next(err);
+    });
+};
+
 const updateUser = (req, res, next) => {
   const { name, about } = req.body;
   User.findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
@@ -64,7 +84,7 @@ const updateUser = (req, res, next) => {
       if (!user) {
         throw new NotFoundError('Пользователь с указанным _id не найден');
       }
-      res.send({ user });
+      res.send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -75,26 +95,9 @@ const updateUser = (req, res, next) => {
     });
 };
 
-const getActiveUser = (req, res, next) => {
-  User.findById(req.user._id)
-    .then((user) => {
-      if (!user) {
-        throw new NotFoundError('Пользователь с указанным _id не найден');
-      }
-      res.send(user);
-    })
-    .catch((err) => {
-      if (err.name === 'CastError') {
-        next(new BadRequesError('Переданы неgggкорректные данные при получении пользователя'));
-        return;
-      }
-      next(err);
-    });
-};
-
 const updateAvatar = (req, res, next) => {
   const { avatar } = req.body;
-  User.findByIdAndUpdate(req.user._id, { avatar }, { new: true })
+  User.findByIdAndUpdate(req.user._id, { avatar }, { new: true, runValidators: true })
     .then((user) => {
       if (!user) {
         throw new NotFoundError('Пользователь с указанным _id не найден');

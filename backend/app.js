@@ -24,7 +24,8 @@ const { PORT = 3000 } = process.env;
 const app = express();
 
 app.use(cors({
-  origin: 'https://mesto.kole4kina.nomoreparties.co',
+  // origin: 'https://mesto.kole4kina.nomoreparties.co',
+  origin: 'http://localhost:3001',
   credentials: true,
 }));
 
@@ -35,7 +36,7 @@ const limiter = rateLimit({
   legacyHeaders: false,
 });
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {});
@@ -55,7 +56,7 @@ app.get('/crash-test', () => {
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required(true).email({ minDomainSegments: 2, tlds: { allow: true } }),
-    password: Joi.string().required(true).min(8),
+    password: Joi.string().required(true),
   }),
 }), login);
 
@@ -65,7 +66,7 @@ app.post('/signup', celebrate({
     about: Joi.string().min(2).max(30),
     avatar: Joi.string().regex(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/),
     email: Joi.string().required(true).email({ minDomainSegments: 2, tlds: { allow: true } }),
-    password: Joi.string().required(true).min(8),
+    password: Joi.string().required(true),
   }),
 }), createUser);
 
@@ -78,11 +79,11 @@ app.get('/signout', (req, res) => {
   res.clearCookie('jwt').send({ message: 'Выход' });
 });
 
-app.use(errorLogger);
-
 app.use((req, res) => {
   res.status(NOT_FOUND_STATUS_CODE).send({ message: 'Данного адреса не существует' });
 });
+
+app.use(errorLogger);
 
 app.use(errors());
 

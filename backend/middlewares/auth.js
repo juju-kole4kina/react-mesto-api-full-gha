@@ -7,7 +7,8 @@ const auth = (req, res, next) => {
   const { jwt } = req.cookies;
 
   if (!jwt) {
-    throw new UnauthorizationError('Необходима авторизация');
+    next(new UnauthorizationError('Необходима авторизация'));
+    return;
   }
 
   let payload;

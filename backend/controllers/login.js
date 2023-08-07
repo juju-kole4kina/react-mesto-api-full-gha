@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
-const UnauthorizationError = require('../errors/unauthorization-err');
 
 const login = (req, res, next) => {
   const { email, password } = req.body;
@@ -17,9 +16,7 @@ const login = (req, res, next) => {
         sameSite: true,
       }).send({ token });
     })
-    .catch(() => {
-      next(new UnauthorizationError('Переданны некорректные данные'));
-    });
+    .catch((err) => next(err));
 };
 
 module.exports = { login };
