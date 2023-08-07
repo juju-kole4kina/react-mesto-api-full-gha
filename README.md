@@ -8,7 +8,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.16.1
+IP 158.160.16.1
 
 Frontend https://mesto.kole4kina.nomoreparties.co
 
