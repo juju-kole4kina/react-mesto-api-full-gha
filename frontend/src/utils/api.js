@@ -114,7 +114,7 @@ changeLikeCardStatus(cardId, isLiked) {
 }
 
 export const api = new Api({
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'api.mesto.kole4kina.nomoreparties.co',
   headers: {
     'Content-Type': 'application/json'
   }
